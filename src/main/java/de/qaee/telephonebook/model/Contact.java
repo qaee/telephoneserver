@@ -1,11 +1,12 @@
 package de.qaee.telephonebook.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-public class Contact {
+public class Contact implements Serializable {
 
     @Id
     @GeneratedValue
@@ -13,7 +14,8 @@ public class Contact {
     private String name;
     private String address;
     private String email;
-    private ContactNumber contactNumber;
+    @OneToMany( cascade = CascadeType.ALL)
+    private List<ContactNumber> contactNumber;
     public Integer getId() {
         return id;
     }
@@ -44,5 +46,16 @@ public class Contact {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<ContactNumber> getContactNumber() {
+        if(contactNumber == null) {
+            contactNumber = new ArrayList<>();
+        }
+        return contactNumber;
+    }
+
+    public void setContactNumber(List<ContactNumber> contactNumber) {
+        this.contactNumber = contactNumber;
     }
 }
