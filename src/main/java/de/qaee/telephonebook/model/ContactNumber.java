@@ -1,12 +1,20 @@
 package de.qaee.telephonebook.model;
 
-import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
-public class ContactNumber implements Serializable {
+@Entity
+public class ContactNumber {
 
-    private int id;
+    @Id
+    @GeneratedValue
+    private Integer id;
     private String telephoneNumber;
-    private Telephonetype telephoneType;
+    private enum TelphoneType {
+        HOME,OFFICE
+    }
+    private TelphoneType telphoneType;
 
     public String getTelephoneNumber() {
         return telephoneNumber;
@@ -16,27 +24,19 @@ public class ContactNumber implements Serializable {
         this.telephoneNumber = telephoneNumber;
     }
 
-    public Telephonetype getTelephoneType() {
-        return telephoneType;
+    public TelphoneType getTelphoneType() {
+        return telphoneType;
     }
 
-    public void setTelephoneType(Telephonetype telephoneType) {
-        this.telephoneType = telephoneType;
+    public void setTelphoneType(TelphoneType telphoneType) {
+        this.telphoneType = telphoneType;
     }
 
-    public Telephonetype[] getAllTypes() {
-        return Telephonetype.values();
-    }
-    public enum Telephonetype {
-        HOME, OFFICE;
-    };
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 }
-
